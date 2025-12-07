@@ -1,3 +1,5 @@
+using TodoMVC.Models.ViewModels;
+
 namespace TodoMVC
 {
     public class Program
@@ -8,6 +10,10 @@ namespace TodoMVC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+
+            //ummmm idk  
+            builder.Services.AddScoped<ITodoVM, TodoVM>(); 
 
             var app = builder.Build();
 
@@ -27,7 +33,7 @@ namespace TodoMVC
             app.MapStaticAssets();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}")
+                pattern: "{controller=Todo}/{action=Index}/{id?}")
                 .WithStaticAssets();
 
             app.Run();

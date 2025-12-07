@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,6 +9,10 @@ namespace TodoMVC.Models.TodoModels
 {
     public class TodoTask : IDueDate, IAssignable, ICompleteable
     {
+        //id
+        public int id { get; set; }
+        private int _id;
+
         public string taskName { get; set; }
 
         //implement IDueDate
@@ -29,6 +34,7 @@ namespace TodoMVC.Models.TodoModels
             dueDate = DateTime.Now.Date.AddDays(7);
             isComplete = false;
             isAssigned = false;
+            this.id = _id++;
         }
 
         public TodoTask(string tName)
@@ -36,7 +42,8 @@ namespace TodoMVC.Models.TodoModels
             taskName = tName;
             dueDate = DateTime.Now.Date.AddDays(7);
             isComplete = false;
-            isAssigned = false; 
+            isAssigned = false;
+            this.id = _id++;
         }
         public TodoTask(string tName, int daysUntilDue)
         {
@@ -44,6 +51,7 @@ namespace TodoMVC.Models.TodoModels
             dueDate = DateTime.Now.Date.AddDays(daysUntilDue); 
             isComplete = false;
             isAssigned = false;
+            this.id = _id++;
         }
         public TodoTask(string tName, Account account)
         {
@@ -52,6 +60,7 @@ namespace TodoMVC.Models.TodoModels
             isComplete = false;
             isAssigned = true;
             assignee = account;
+            this.id = _id++;
         }
         public TodoTask(string tName, int daysUntilDue, Account account)
         {
@@ -60,6 +69,7 @@ namespace TodoMVC.Models.TodoModels
             isComplete = false;
             isAssigned = true;
             assignee = account;
+            this.id = _id++;
         }
 
 
