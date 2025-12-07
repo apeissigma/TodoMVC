@@ -44,7 +44,7 @@ namespace TodoMVC.Models.TodoModels
             taskDescription = "Default Description";
             dueDate = DateTime.Now.AddDays(7);
             isComplete = false;
-            this.id = ++_id;
+            this.id = _id++;
         }
 
         //implement ICompleteable
