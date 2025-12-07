@@ -7,7 +7,7 @@ namespace TodoMVC.Models.TodoModels
 {
     public interface IDueDate
     {
-        DateTime dueDate { get; }
-        bool isOverdue { get; }
+        DateTime dueDate { get; set; }
+        bool isOverdue { get; set; }
     }
 }

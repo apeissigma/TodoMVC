@@ -1,9 +1,9 @@
 ﻿namespace TodoMVCTest
 {
-    public class UnitTest1
+    public class POCOModelTest
     {
         [Fact]
-        public void Test1()
+        public void Test2()
         {
 
         }

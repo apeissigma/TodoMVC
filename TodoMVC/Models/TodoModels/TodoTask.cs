@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace TodoMVC.Models.TodoModels
 {
-    public class TodoTask : IDueDate, ICompleteable
+    public class TodoTask : ITask
     {
-        //id
-        public int id { get; private set; }
-        private static int _id; //made static so the id value property increments across all task instances
+        private static int _id = 0; //made static so the id value property increments across all task instances
 
+        //implement ITask
+        public int id { get; private set; }
         public string taskName { get; set; }
         public string taskDescription { get; set; }
 

@@ -11,7 +11,7 @@ namespace TodoMVC.Controllers
         //request the interface (Debug fix)
         private readonly ITodoVM _todoVM; 
 
-        List<TodoTask> Tasks; 
+        List<ITask> Tasks; 
 
         //using view model list
         public TodoController(ITodoVM vm)
@@ -32,7 +32,7 @@ namespace TodoMVC.Controllers
         //mark task as complete
         public ActionResult MarkComplete(int id)
         {
-            TodoTask t = Tasks.FirstOrDefault(t => t.id == id);
+            ITask t = Tasks.FirstOrDefault(t => t.id == id);
             if (t != null) t.toggleCompleteness();
             try
             {
@@ -48,7 +48,7 @@ namespace TodoMVC.Controllers
         //get details
         public ActionResult Details(int id)
         {
-            TodoTask t = Tasks.FirstOrDefault(t => t.id == id);
+            ITask t = Tasks.FirstOrDefault(t => t.id == id);
             return View(t);
         }
 
@@ -78,7 +78,7 @@ namespace TodoMVC.Controllers
         // GET: edit
         public ActionResult Edit(int id)
         {
-            TodoTask t = Tasks.FirstOrDefault(t => t.id == id);
+            ITask t = Tasks.FirstOrDefault(t => t.id == id);
 
             return View(t);
         }
@@ -90,7 +90,7 @@ namespace TodoMVC.Controllers
         {
             try
             {
-                TodoTask t = Tasks.FirstOrDefault(t => t.id == id);
+                ITask t = Tasks.FirstOrDefault(t => t.id == id);
 
                 t.taskName = collection["Name"];
 
@@ -105,7 +105,7 @@ namespace TodoMVC.Controllers
         // GET: delete
         public ActionResult Delete(int id)
         {
-            TodoTask t = Tasks.FirstOrDefault(t => t.id == id);
+            ITask t = Tasks.FirstOrDefault(t => t.id == id);
             Tasks.Remove(t);
             return RedirectToAction(nameof(Index));
         }
@@ -117,7 +117,7 @@ namespace TodoMVC.Controllers
         {
             try
             {
-                TodoTask t = Tasks.FirstOrDefault(t => t.id == id);
+                ITask t = Tasks.FirstOrDefault(t => t.id == id);
                 Tasks.Remove(t);
                 return RedirectToAction(nameof(Index));
             }

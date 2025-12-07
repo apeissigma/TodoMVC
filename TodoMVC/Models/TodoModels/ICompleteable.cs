@@ -7,7 +7,7 @@ namespace TodoMVC.Models.TodoModels
 {
     public interface ICompleteable
     {
-        bool isComplete { get; }
+        bool isComplete { get; set; }
 
         void markComplete();
         void markIncomplete();

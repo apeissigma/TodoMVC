@@ -5,16 +5,15 @@ namespace TodoMVC.Models.ViewModels
     public class TodoVM : ITodoVM
     {
         //collection of tasks
-        private static List<TodoTask> _tasks;
+        private static List<ITask> _tasks;
 
-        public List<TodoTask> Tasks
+        public List<ITask> Tasks
         {
-            //lazy loading
             get
             {
                 if (_tasks == null)
                 {
-                    _tasks = new List<TodoTask>()
+                    _tasks = new List<ITask>()
                     {
                         new TodoTask(),
                         new TodoTask() { taskName = "Class Diagram UML", taskDescription = "UML for the model classes", dueDate = DateTime.Now.AddDays(3) },
