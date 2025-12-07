@@ -12,8 +12,9 @@ namespace TodoMVC
             builder.Services.AddControllersWithViews();
 
 
-            //ummmm idk  
+            //map interface to implementation with dependency inversion
             builder.Services.AddScoped<ITodoVM, TodoVM>(); 
+
 
             var app = builder.Build();
 

@@ -12,22 +12,17 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="id" class="control-label"></label>
-                <input asp-for="id" class="form-control" />
-                <span asp-validation-for="id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="taskName" class="control-label"></label>
+                <label asp-for="taskName" class="control-label">Name</label>
                 <input asp-for="taskName" class="form-control" />
                 <span asp-validation-for="taskName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="taskDescription" class="control-label"></label>
+                <label asp-for="taskDescription" class="control-label">Description</label>
                 <input asp-for="taskDescription" class="form-control" />
                 <span asp-validation-for="taskDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="dueDate" class="control-label"></label>
+                <label asp-for="dueDate" class="control-label">Due Date</label>
                 <input asp-for="dueDate" class="form-control" />
                 <span asp-validation-for="dueDate" class="text-danger"></span>
             </div>

@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * Static Incrementing for ID Reference:
+ * https://stackoverflow.com/questions/8132413/c-sharp-incrementing-static-variables-upon-instantiation
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +24,7 @@ namespace TodoMVC.Models.TodoModels
         public DateTime dueDate { get; set; }
         public bool isOverdue 
         { 
+            //check if the task is overdue automatically
             get
             {
                 DateTime dt = DateTime.Now;
@@ -31,10 +37,9 @@ namespace TodoMVC.Models.TodoModels
         //implement ICompleteable
         public bool isComplete { get; set; }
 
-
-        //default constructor
         public TodoTask() 
         {
+            //assign default values
             taskName = "Default Name";
             taskDescription = "Default Description";
             dueDate = DateTime.Now.AddDays(7);
@@ -51,6 +56,7 @@ namespace TodoMVC.Models.TodoModels
         {
             isComplete = false;
         }
+        //flexible toggle that changes the task's completeness based on it's current state
         public void toggleCompleteness()
         {
             if (!isComplete) isComplete = true;

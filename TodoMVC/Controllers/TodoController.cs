@@ -8,35 +8,31 @@ namespace TodoMVC.Controllers
 {
     public class TodoController : Controller
     {
-        //request the interface (Debug fix)
-        private readonly ITodoVM _todoVM; 
-
+        private readonly ITodoVM _todoVM; //implement the view model interface
         List<ITask> Tasks; 
 
-        //using view model list
+        //constructor w/ dependency injection
         public TodoController(ITodoVM vm)
         {
+            //store the injected dependency and reference the task list from the view model
             _todoVM = vm;
             Tasks = vm.Tasks; 
         }
 
-
-
-        //Get controller/pass task list to index controller
+        //pass task list to index view to display all tasks
         public IActionResult Index()
         {
             return View(Tasks);
         }
 
-
-        //mark task as complete
+        //mark task as complete or incomplete based on current state
         public ActionResult MarkComplete(int id)
         {
-            ITask t = Tasks.FirstOrDefault(t => t.id == id);
+            ITask t = Tasks.FirstOrDefault(t => t.id == id); //find task by id
             if (t != null) t.toggleCompleteness();
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index)); //redirect to updated list
             }
             catch
             {
@@ -44,24 +40,29 @@ namespace TodoMVC.Controllers
             }
         }
 
-
-        //get details
+        //get detail view of a task via it's id
         public ActionResult Details(int id)
         {
-            ITask t = Tasks.FirstOrDefault(t => t.id == id);
-            return View(t);
+            try
+            {
+                ITask t = Tasks.FirstOrDefault(t => t.id == id);
+                return View(t);
+            }
+            catch
+            {
+                return View(); 
+            }
         }
 
-        //get create page
+        //get create page with form for creating a new task
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        //if you can pull a task out of the forms header, pull it out and add it
+        //processes form submission to create new task, maps form data to task object
+        [HttpPost] //post requests only
+        [ValidateAntiForgeryToken] 
         public ActionResult Create(TodoTask t) 
         {
             try
@@ -75,7 +76,7 @@ namespace TodoMVC.Controllers
             }
         }
 
-        // GET: edit
+        //get edit page with form for editing an existing task 
         public ActionResult Edit(int id)
         {
             ITask t = Tasks.FirstOrDefault(t => t.id == id);
@@ -83,16 +84,19 @@ namespace TodoMVC.Controllers
             return View(t);
         }
 
-        // POST: edit
+        //processes form submission to edit an existing task, maps form data to task object
+        //IFormCollection used to process form data 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, IFormCollection formData)
         {
             try
             {
                 ITask t = Tasks.FirstOrDefault(t => t.id == id);
 
-                t.taskName = collection["Name"];
+                //assign form data to task 
+                t.taskName = formData["taskName"];
+                t.taskDescription = formData["taskDescription"];
 
                 return RedirectToAction(nameof(Index));
             }
@@ -102,18 +106,8 @@ namespace TodoMVC.Controllers
             }
         }
 
-        // GET: delete
+        //deletes task by id (removes it from the task collection)
         public ActionResult Delete(int id)
-        {
-            ITask t = Tasks.FirstOrDefault(t => t.id == id);
-            Tasks.Remove(t);
-            return RedirectToAction(nameof(Index));
-        }
-
-        // POST: delete
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
         {
             try
             {
@@ -123,12 +117,10 @@ namespace TodoMVC.Controllers
             }
             catch
             {
-                return View("View");
+                return View();
             }
+            
         }
-
-
-
 
         public IActionResult Privacy()
         {
