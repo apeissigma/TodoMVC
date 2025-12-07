@@ -28,7 +28,24 @@ namespace TodoMVC.Controllers
             return View(Tasks);
         }
 
-        //get controller details
+
+        //mark task as complete
+        public ActionResult MarkComplete(int id)
+        {
+            TodoTask t = Tasks.FirstOrDefault(t => t.id == id);
+            if (t != null) t.toggleCompleteness();
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+
+        //get details
         public ActionResult Details(int id)
         {
             TodoTask t = Tasks.FirstOrDefault(t => t.id == id);
@@ -41,7 +58,7 @@ namespace TodoMVC.Controllers
             return View();
         }
 
-        // POST: todocontroller create
+        // POST: create
         [HttpPost]
         [ValidateAntiForgeryToken]
         //if you can pull a task out of the forms header, pull it out and add it
@@ -61,7 +78,7 @@ namespace TodoMVC.Controllers
         // GET: edit
         public ActionResult Edit(int id)
         {
-            TodoTask t = Tasks.FirstOrDefault(d => d.id == id);
+            TodoTask t = Tasks.FirstOrDefault(t => t.id == id);
 
             return View(t);
         }
@@ -73,7 +90,7 @@ namespace TodoMVC.Controllers
         {
             try
             {
-                TodoTask t = Tasks.FirstOrDefault(d => d.id == id);
+                TodoTask t = Tasks.FirstOrDefault(t => t.id == id);
 
                 t.taskName = collection["Name"];
 
@@ -88,19 +105,19 @@ namespace TodoMVC.Controllers
         // GET: delete
         public ActionResult Delete(int id)
         {
-            TodoTask t = Tasks.FirstOrDefault(d => d.id == id);
+            TodoTask t = Tasks.FirstOrDefault(t => t.id == id);
             Tasks.Remove(t);
             return RedirectToAction(nameof(Index));
         }
 
-        // POST: DogController/Delete/5
+        // POST: delete
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
             try
             {
-                TodoTask t = Tasks.FirstOrDefault(d => d.id == id);
+                TodoTask t = Tasks.FirstOrDefault(t => t.id == id);
                 Tasks.Remove(t);
                 return RedirectToAction(nameof(Index));
             }
@@ -109,6 +126,7 @@ namespace TodoMVC.Controllers
                 return View("View");
             }
         }
+
 
 
 

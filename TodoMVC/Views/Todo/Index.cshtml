@@ -13,11 +13,24 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.taskName)
+                Complete It
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.dueDate)
+                 
             </th>
+            <th>
+                Task
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Due Date
+            </th>
+            <th>
+                Overdue
+            </th>
+            
             <th></th>
         </tr>
     </thead>
@@ -25,12 +38,25 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.ActionLink("Mark Complete", "MarkComplete", new { id = item.id })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isComplete)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.taskName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.dueDate)
+                @Html.DisplayFor(modelItem => item.taskDescription)
             </td>
-            <td> @*change to id=item.Id to pass in dog ids*@
+            <td>
+                @Html.DisplayFor(modelItem => item.dueDate.DayOfWeek), 
+                @Html.DisplayFor(modelItem => item.dueDate.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isOverdue)
+            </td>
+            <td> 
                 @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
                 @Html.ActionLink("Details", "Details", new { id = item.id }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.id })

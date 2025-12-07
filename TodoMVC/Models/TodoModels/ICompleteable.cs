@@ -11,7 +11,6 @@ namespace TodoMVC.Models.TodoModels
 
         void markComplete();
         void markIncomplete();
-
-        bool checkIfComplete(); 
+        void toggleCompleteness(); 
     }
 }

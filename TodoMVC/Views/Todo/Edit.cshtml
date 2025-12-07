@@ -6,7 +6,6 @@
 
 <h1>Edit</h1>
 
-<h4>Dog</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -21,6 +20,11 @@
                 <label asp-for="taskName" class="control-label"></label>
                 <input asp-for="taskName" class="form-control" />
                 <span asp-validation-for="taskName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="taskDescription" class="control-label"></label>
+                <input asp-for="taskDescription" class="form-control" />
+                <span asp-validation-for="taskDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="dueDate" class="control-label"></label>

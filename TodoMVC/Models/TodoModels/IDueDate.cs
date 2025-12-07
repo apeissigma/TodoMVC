@@ -9,7 +9,5 @@ namespace TodoMVC.Models.TodoModels
     {
         DateTime dueDate { get; }
         bool isOverdue { get; }
-
-        bool checkIfOverdue(); 
     }
 }
