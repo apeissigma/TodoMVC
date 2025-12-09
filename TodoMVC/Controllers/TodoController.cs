@@ -26,7 +26,7 @@ namespace TodoMVC.Controllers
         }
 
         //mark task as complete or incomplete based on current state
-        public ActionResult MarkComplete(int id)
+        public ActionResult ToggleComplete(int id)
         {
             ITask t = Tasks.FirstOrDefault(t => t.id == id); //find task by id
             if (t != null) t.toggleCompleteness();

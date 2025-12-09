@@ -5,6 +5,7 @@
 
 using Microsoft.VisualBasic;
 using System;
+using System.Security.Cryptography.X509Certificates;
 using TodoMVC.Models.TodoModels;
 namespace TodoMVC.Models.ViewModels
 {
@@ -20,18 +21,23 @@ namespace TodoMVC.Models.ViewModels
             {
                 if (_tasks == null)
                 {
-                    _tasks = new List<ITask>()
-                    {
-                        //create some default tasks at launch
-                        new TodoTask(),
-                        new TodoTask() { taskName = "Class Diagram UML", taskDescription = "UML for the model classes", dueDate = DateTime.Now.AddDays(3) },
-                        new TodoTask() { taskName = "UI", taskDescription = "Functional presentation layer", dueDate = new DateTime(2025, 12, 9, 12, 30, 0) },
-                        new TodoTask() { taskName = "Tests", taskDescription = "MCFire coverage for model classes, view models, controllers", dueDate = new DateTime(2025, 12, 9, 12, 30, 0) },
-                        new TodoTask() { taskName = "finish this shit!", taskDescription = "ummm yeah", dueDate = new DateTime(2025, 12, 9, 12, 30, 0) }
-                    };
+                    SeedData();
                 }
                 return _tasks;
             }
+        }
+
+        //seed pre-made tasks at launch
+        //very lightly supports SOC
+        private void SeedData()
+        {
+
+            _tasks = new List<ITask>
+            {
+                new TodoTask() { taskName = "Class Diagram UML", taskDescription = "UML for the model classes", dueDate = new DateTime(2025, 12, 9, 12, 30, 0, 0), isComplete = true },
+                new TodoTask() { taskName = "UI", taskDescription = "Functional presentation layer", dueDate = new DateTime(2025, 12, 9, 12, 30, 0, 0), isComplete = true },
+                new TodoTask() { taskName = "Tests", taskDescription = "MCFire coverage for model classes & view models", dueDate = new DateTime(2025, 12, 9, 12, 30, 0, 0), isComplete = true }
+            };
         }
     }
 }

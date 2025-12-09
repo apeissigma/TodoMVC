@@ -39,10 +39,7 @@ namespace TodoMVC.Models.TodoModels
 
         public TodoTask() 
         {
-            //assign default values
-            taskName = "Default Name";
-            taskDescription = "Default Description";
-            dueDate = DateTime.Now.AddDays(7);
+            //defaults at initialization
             isComplete = false;
             this.id = _id++;
         }

@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<TodoMVC.Models.TodoModels.ITask>;
 
 @{
-    ViewData["Title"] = "TODO";
+    ViewData["Title"] = "Todo ";
 }
 
-<h1>TODO</h1>
+<h1>What to do...</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -12,11 +12,9 @@
 <table class="table">
     <thead>
         <tr>
+            <th></th>
             <th>
-                Complete It!
-            </th>
-            <th>
-                 
+                Toggle Status
             </th>
             <th>
                 Task
@@ -38,10 +36,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.ActionLink("Mark Complete", "MarkComplete", new { id = item.id })
+                @Html.DisplayFor(modelItem => item.isComplete)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.isComplete)
+                @Html.ActionLink("Toggle", "ToggleComplete", new { id = item.id })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.taskName)
@@ -50,8 +48,7 @@
                 @Html.DisplayFor(modelItem => item.taskDescription)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.dueDate.DayOfWeek), 
-                @Html.DisplayFor(modelItem => item.dueDate.Date)
+                    @item.dueDate.ToString("dddd, MM/dd/yyyy HH:mm tt")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.isOverdue)
