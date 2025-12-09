@@ -2,20 +2,23 @@
 using System.Diagnostics;
 using TodoMVC.Models;
 using TodoMVC.Models.TodoModels;
-using TodoMVC.Models.ViewModels;
+using TodoMVC.Services;
+using TodoMVC.ViewModels;
 
 namespace TodoMVC.Controllers
 {
     public class TodoController : Controller
     {
         private readonly ITodoVM _todoVM; //implement the view model interface
+        private readonly ITodoService _todoService; //implement the service interface
         List<ITask> Tasks; 
 
         //constructor w/ dependency injection
-        public TodoController(ITodoVM vm)
+        public TodoController(ITodoVM vm, ITodoService todoService)
         {
             //store the injected dependency and reference the task list from the view model
             _todoVM = vm;
+            _todoService = todoService;
             Tasks = vm.Tasks; 
         }
 
@@ -28,6 +31,18 @@ namespace TodoMVC.Controllers
         //mark task as complete or incomplete based on current state
         public ActionResult ToggleComplete(int id)
         {
+            try
+            {
+                _todoService.ToggleTaskComplete(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+
+
+            /*
             ITask t = Tasks.FirstOrDefault(t => t.id == id); //find task by id
             if (t != null) t.toggleCompleteness();
             try
@@ -38,6 +53,7 @@ namespace TodoMVC.Controllers
             {
                 return View();
             }
+            */
         }
 
         //get detail view of a task via it's id

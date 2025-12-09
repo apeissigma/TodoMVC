@@ -7,7 +7,7 @@ using Microsoft.VisualBasic;
 using System;
 using System.Security.Cryptography.X509Certificates;
 using TodoMVC.Models.TodoModels;
-namespace TodoMVC.Models.ViewModels
+namespace TodoMVC.ViewModels
 {
     public class TodoVM : ITodoVM
     {
@@ -25,6 +25,15 @@ namespace TodoMVC.Models.ViewModels
                 }
                 return _tasks;
             }
+        }
+
+        public ITask GetTaskById(int id)
+        {
+            foreach (ITask task in _tasks)
+            {
+                if (task.id == id) return task;
+            }
+            return _tasks[0];
         }
 
         //seed pre-made tasks at launch

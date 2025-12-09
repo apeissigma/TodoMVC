@@ -1,4 +1,6 @@
-using TodoMVC.Models.ViewModels;
+using TodoMVC.Services;
+using TodoMVC.ViewModels;
+using TodoMVC.Services; 
 
 namespace TodoMVC
 {
@@ -13,7 +15,8 @@ namespace TodoMVC
 
 
             //map interface to implementation with dependency inversion
-            builder.Services.AddScoped<ITodoVM, TodoVM>(); 
+            builder.Services.AddScoped<ITodoVM, TodoVM>();
+            builder.Services.AddScoped<ITodoService, TodoService>();
 
 
             var app = builder.Build();
