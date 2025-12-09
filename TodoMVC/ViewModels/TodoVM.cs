@@ -40,7 +40,6 @@ namespace TodoMVC.ViewModels
         //very lightly supports SOC
         private void SeedData()
         {
-
             _tasks = new List<ITask>
             {
                 new TodoTask() { taskName = "Class Diagram UML", taskDescription = "UML for the model classes", dueDate = new DateTime(2025, 12, 9, 12, 30, 0, 0), isComplete = true },

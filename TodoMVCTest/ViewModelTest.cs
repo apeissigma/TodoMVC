@@ -1,4 +1,4 @@
-﻿using TodoMVC.Models.ViewModels;
+﻿using TodoMVC.ViewModels;
 using TodoMVC.Models.TodoModels;
 
 namespace TodoMVCTest
@@ -20,6 +20,16 @@ namespace TodoMVCTest
             var todoVM = new TodoVM();
 
             Assert.IsAssignableFrom<ITodoVM>(todoVM);
+        }
+
+        [Fact]
+        public void SeedDefaultData()
+        {
+            var todoVM = new TodoVM();
+
+            int count = todoVM.Tasks.Count;
+
+            Assert.Equal(3, count);
         }
     }
 }

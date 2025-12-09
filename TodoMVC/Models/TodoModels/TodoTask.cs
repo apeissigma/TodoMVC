@@ -40,6 +40,9 @@ namespace TodoMVC.Models.TodoModels
         public TodoTask() 
         {
             //defaults at initialization
+            taskName = "Default";
+            taskDescription = "Default";
+            dueDate = new DateTime();
             isComplete = false;
             this.id = _id++;
         }

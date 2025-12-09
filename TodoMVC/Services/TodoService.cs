@@ -17,7 +17,6 @@ namespace TodoMVC.Services
             if (task != null)
             {
                 task.toggleCompleteness();
-                //_vm.UpdateTask(task);
             }
         }
     }

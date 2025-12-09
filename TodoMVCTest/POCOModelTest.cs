@@ -11,7 +11,7 @@ namespace TodoMVCTest
 
             Assert.False(string.IsNullOrEmpty(task.taskName));
             Assert.False(string.IsNullOrEmpty(task.taskDescription));
-            Assert.NotEqual(default, task.dueDate);
+            Assert.NotNull(task.dueDate);
             Assert.False(task.isComplete);
         }
 
