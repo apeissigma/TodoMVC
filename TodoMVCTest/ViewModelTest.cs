@@ -1,5 +1,4 @@
-﻿using TodoMVC.ViewModels;
-using TodoMVC.Models.TodoModels;
+﻿using TodoMVC.Models.TodoModels;
 
 namespace TodoMVCTest
 {

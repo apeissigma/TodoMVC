@@ -3,23 +3,20 @@ using System.Diagnostics;
 using TodoMVC.Models;
 using TodoMVC.Models.TodoModels;
 using TodoMVC.Services;
-using TodoMVC.ViewModels;
 
 namespace TodoMVC.Controllers
 {
     public class TodoController : Controller
     {
-        private readonly ITodoVM _todoVM; //implement the view model interface
         private readonly ITodoService _todoService; //implement the service interface
         List<ITask> Tasks; 
 
         //constructor w/ dependency injection
-        public TodoController(ITodoVM vm, ITodoService todoService)
+        public TodoController(ITodoService todoService)
         {
             //store the injected dependency and reference the task list from the view model
-            _todoVM = vm;
             _todoService = todoService;
-            Tasks = vm.Tasks; 
+            Tasks = todoService.Tasks; 
         }
 
         //pass task list to index view to display all tasks
