@@ -1,14 +1,17 @@
-﻿using TodoMVC.Models.TodoModels; 
+﻿/*
+    Disabled running tests in parallel
+    Reference: https://xunit.net/docs/running-tests-in-msbuild
+ */
+
+using System.Reflection;
+using System.Reflection.Metadata;
+using TodoMVC.Models.TodoModels;
+using TodoMVC.Services;
 
 namespace TodoMVCTest
 {
     public class POCOModelTest
     {
-        public POCOModelTest()
-        {
-            TodoTask.ResetIdCounter(); 
-        }
-
         [Fact]
         public void TodoTask_DefaultConstructor_NotNullOrEmpty()
         {
@@ -42,18 +45,17 @@ namespace TodoMVCTest
         [Fact]
         public void TodoId_IsIncrementing()
         {
-            //act & arrange
-            TodoTask.ResetIdCounter(); 
+            //arrange
+            var startingTask = new TodoTask(); 
+            int startingId = startingTask.id;  //use as reference to increment from starting point
+
+            //act
             var task1 = new TodoTask();
             var task2 = new TodoTask();
-            var task3 = new TodoTask();
 
             //assert
-            Assert.Equal(0, task1.id);
-            Assert.Equal(1, task2.id);
-            Assert.Equal(2, task3.id);
-            Assert.NotEqual(task1.id, task2.id);
-            Assert.NotEqual(task2.id, task3.id);
+            Assert.Equal(startingId + 1, task1.id); 
+            Assert.Equal(startingId + 2, task2.id); 
         }
 
         [Fact]

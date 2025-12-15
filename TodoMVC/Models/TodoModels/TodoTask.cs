@@ -62,9 +62,5 @@ namespace TodoMVC.Models.TodoModels
             if (!isComplete) isComplete = true;
             else isComplete = false; 
         }
-        public static void ResetIdCounter()
-        {
-            _id = 0;
-        }
     }
 }

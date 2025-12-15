@@ -1,44 +1,90 @@
-﻿using TodoMVC.Models.TodoModels;
+﻿/*
+    Disabled running tests in parallel
+    Reference: https://xunit.net/docs/running-tests-in-msbuild
+ */
+
+using TodoMVC.Models.TodoModels;
 using TodoMVC.Services;
 
 namespace TodoMVCTest
 {
     public class ServiceTest
     {
-        /*
-        private ITodoVM _vm;
-        private ITodoService _service;
+        
+        [Fact]
+        public void CreateService_NotNull()
+        {
+            //arrange & act
+            var service = new TodoService();
+
+            //assert
+            Assert.NotNull(service.Tasks);
+            Assert.IsAssignableFrom<List<ITask>>(service.Tasks);
+        }
 
         [Fact]
-        public void ToggleTaskComplete_Complete()
+        public void CreateService_ImplementsInterface()
         {
-            _vm = new TodoVM();
-            _service = new TodoService(_vm);
+            //arrange & act
+            var service = new TodoService();
 
-            _vm.Tasks.Add(new TodoTask() { taskName = "test", taskDescription = "test", dueDate = new DateTime(2025, 12, 9, 12, 30, 0, 0), isComplete = false });
+            //assert
+            Assert.IsAssignableFrom<ITodoService>(service);
+        }
 
-            var lastTaskIndex = _vm.Tasks.Count - 1;
-            var lastTask = _vm.Tasks[lastTaskIndex];
+        [Fact]
+        public void DefaultDataSeeded()
+        {
+            //arrange & act
+            TodoService.ClearCollection(); //resets service's data 
+            var service = new TodoService(); //should be instantiated with 3 dummy tasks
+            int count = service.Tasks.Count;
 
-            _service.ToggleTaskComplete(lastTask.id);
+            //assert
+            Assert.Equal(3, count);
+        }
 
+        [Fact]
+        public void ToggleTask_IncompleteToComplete()
+        {
+            //arrange
+            var service = new TodoService();
+            
+            //act
+            service.Tasks.Add(new TodoTask() 
+            { 
+                taskName = "test", 
+                taskDescription = "test", 
+                dueDate = new DateTime(2025, 12, 9, 12, 30, 0, 0), 
+                isComplete = false 
+            });
+            var lastTaskIndex = service.Tasks.Count - 1;
+            var lastTask = service.Tasks[lastTaskIndex];
+            service.ToggleTaskComplete(lastTask.id);
+
+            //assert
             Assert.True(lastTask.isComplete);
         }
 
-        public void ToggleTaskComplete_Incomplete()
+        public void ToggleTask_CompleteToIncomplete()
         {
-            _vm = new TodoVM();
-            _service = new TodoService(_vm);
+            //arrange
+            var service = new TodoService();
 
-            _vm.Tasks.Add(new TodoTask() { taskName = "test", taskDescription = "test", dueDate = new DateTime(2025, 12, 9, 12, 30, 0, 0), isComplete = true });
+            //act
+            service.Tasks.Add(new TodoTask()
+            {
+                taskName = "test",
+                taskDescription = "test",
+                dueDate = new DateTime(2025, 12, 9, 12, 30, 0, 0),
+                isComplete = true
+            });
+            var lastTaskIndex = service.Tasks.Count - 1;
+            var lastTask = service.Tasks[lastTaskIndex];
+            service.ToggleTaskComplete(lastTask.id);
 
-            var lastTaskIndex = _vm.Tasks.Count - 1;
-            var lastTask = _vm.Tasks[lastTaskIndex];
-
-            _service.ToggleTaskComplete(lastTask.id);
-
+            //assert
             Assert.False(lastTask.isComplete);
         }
-        */
     }
 }

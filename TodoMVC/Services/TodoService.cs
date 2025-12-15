@@ -17,16 +17,20 @@ namespace TodoMVC.Services
         //static collection for persistance across requests
         private static List<ITask> _tasks;
 
+        //tracks initialization to debug static collection
+        private static bool _isInitialized = false; 
+
         //implement the ITodoVM interface
         public List<ITask> Tasks
         {
             get
             {
-                if (_tasks == null)
+                if (!_isInitialized)
                 {
                     SeedData();
+                    _isInitialized = true;
                 }
-                return _tasks;
+                return _tasks; 
             }
         }
 
@@ -58,6 +62,13 @@ namespace TodoMVC.Services
                 new TodoTask() { taskName = "UI", taskDescription = "Functional presentation layer", dueDate = new DateTime(2025, 12, 9, 12, 30, 0, 0), isComplete = true },
                 new TodoTask() { taskName = "Tests", taskDescription = "MCFire coverage for model classes & view models", dueDate = new DateTime(2025, 12, 9, 12, 30, 0, 0), isComplete = true }
             };
+        }
+
+        //clears collection in case of overlaps
+        public static void ClearCollection()
+        {
+            _tasks = null;
+            _isInitialized = false; 
         }
     }
 }
