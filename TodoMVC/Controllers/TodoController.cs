@@ -37,20 +37,6 @@ namespace TodoMVC.Controllers
             {
                 return View();
             }
-
-
-            /*
-            ITask t = Tasks.FirstOrDefault(t => t.id == id); //find task by id
-            if (t != null) t.toggleCompleteness();
-            try
-            {
-                return RedirectToAction(nameof(Index)); //redirect to updated list
-            }
-            catch
-            {
-                return View();
-            }
-            */
         }
 
         //get detail view of a task via it's id
@@ -110,6 +96,7 @@ namespace TodoMVC.Controllers
                 //assign form data to task 
                 t.taskName = formData["taskName"];
                 t.taskDescription = formData["taskDescription"];
+                t.dueDate = DateTime.Parse(formData["dueDate"]);
 
                 return RedirectToAction(nameof(Index));
             }

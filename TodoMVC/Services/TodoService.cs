@@ -60,7 +60,7 @@ namespace TodoMVC.Services
             {
                 new TodoTask() { taskName = "Class Diagram UML", taskDescription = "UML for the model classes", dueDate = new DateTime(2025, 12, 9, 12, 30, 0, 0), isComplete = true },
                 new TodoTask() { taskName = "UI", taskDescription = "Functional presentation layer", dueDate = new DateTime(2025, 12, 9, 12, 30, 0, 0), isComplete = true },
-                new TodoTask() { taskName = "Tests", taskDescription = "MCFire coverage for model classes & view models", dueDate = new DateTime(2025, 12, 9, 12, 30, 0, 0), isComplete = true }
+                new TodoTask() { taskName = "Tests", taskDescription = "MCFire coverage for model classes & service", dueDate = new DateTime(2025, 12, 9, 12, 30, 0, 0), isComplete = true }
             };
         }
 
