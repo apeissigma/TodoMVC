@@ -5,7 +5,6 @@
 
 using Microsoft.VisualBasic;
 using System;
-using System.Security.Cryptography.X509Certificates;
 using TodoMVC.Models.TodoModels;
 
 namespace TodoMVC.Services
@@ -54,7 +53,7 @@ namespace TodoMVC.Services
 
         //seed pre-made tasks at launch
         //very lightly supports SOC
-        private void SeedData()
+        public void SeedData()
         {
             _tasks = new List<ITask>
             {
