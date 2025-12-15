@@ -1,4 +1,10 @@
-﻿@model TodoMVC.Models.TodoModels.ITask;
+﻿@*
+    ASP.NET Boostrap component reference: 
+    https://getbootstrap.com/docs/4.0/components/badge/
+    https://getbootstrap.com/docs/4.0/components/buttons/
+*@
+
+@model TodoMVC.Models.TodoModels.ITask;
 
 @{
     ViewData["Title"] = "Details";
@@ -34,21 +40,53 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.dueDate)
         </dd>
+        <dt class="col-sm-2">
+            Task Status
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.isComplete)
+            {
+                <span class="badge bg-success">Complete</span>
+            }
+            else
+            {
+                <span class="badge bg-warning text-decoration-none">Incomplete</span>
+            }
+        </dd>
         <dt class = "col-sm-2">
             Overdue Status
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.isOverdue)
+            @* overdue but completed *@
+            @if (Model.isOverdue && Model.isComplete)
+            {
+                <span class="badge bg-light">Completed</span>
+            }
+            @* not overdue but completed *@
+            else if (Model.isOverdue && Model.isComplete)
+            {
+                <span class="badge bg-light">Completed</span>
+            }
+            @* overdue *@
+            else if (Model.isOverdue)
+            {
+                <span class="badge bg-danger">Overdue</span>
+            }
+            @* not overdue but due in 24 hours *@
+            else if (!Model.isOverdue && (Model.dueDate.AddDays(-1) <= DateTime.Now))
+            {
+                <span class="badge bg-warning">Due Soon</span>
+            }
+            @* not overdue *@
+            else
+            {
+                <span class="badge bg-secondary">On Time</span>
+            }
         </dd>
-        <dt class="col-sm-2">
-            Progress Status
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.isComplete)
-        </dd>
+        
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+    <a href="@Url.Action("Edit", new { id = Model.id })" class="btn bg-primary">Edit Task</a>
+    <a asp-action="Index" class="btn bg-secondary">Back to List</a>
 </div>

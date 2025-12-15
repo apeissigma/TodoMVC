@@ -1,4 +1,10 @@
-﻿@model TodoMVC.Models.TodoModels.ITask;
+﻿@*
+    ASP.NET Boostrap component reference: 
+    https://getbootstrap.com/docs/4.0/components/badge/
+    https://getbootstrap.com/docs/4.0/components/buttons/
+*@
+
+@model TodoMVC.Models.TodoModels.ITask;
 
 @{
     ViewData["Title"] = "Edit";
@@ -26,15 +32,31 @@
                 <input asp-for="dueDate" class="form-control" />
                 <span asp-validation-for="dueDate" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <label>Task Status</label>
+                <br />
+                @if (Model.isComplete)
+                {
+                    <a href="@Url.Action("ToggleComplete", "Todo", new { id = Model.id })" class="btn btn-success btn-sm">Complete</a>
+                }
+                else
+                {
+                    <a href="@Url.Action("ToggleComplete", "Todo", new { id = Model.id })" class="btn btn-warning btn-sm">Incomplete</a>
+                }
+            </div>
+
+            <div><hr /></div>
+
+            <div class="form-group">
+                <input type="submit" value="Save Task" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
 </div>
 
 @section Scripts {

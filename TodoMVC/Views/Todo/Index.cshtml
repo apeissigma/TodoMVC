@@ -1,4 +1,10 @@
-﻿@model IEnumerable<TodoMVC.Models.TodoModels.ITask>;
+﻿@*
+    ASP.NET Boostrap component reference: 
+    https://getbootstrap.com/docs/4.0/components/badge/
+    https://getbootstrap.com/docs/4.0/components/buttons/
+*@
+
+@model IEnumerable<TodoMVC.Models.TodoModels.ITask>;
 
 @{
     ViewData["Title"] = "Todo ";
@@ -7,14 +13,13 @@
 <h1>What to do...</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Create a New Task</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th></th>
             <th>
-                Toggle Status
+                Status
             </th>
             <th>
                 Task
@@ -36,10 +41,14 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.isComplete)
-            </td>
-            <td>
-                @Html.ActionLink("Toggle", "ToggleComplete", new { id = item.id })
+                    @if (@item.isComplete)
+                    {
+                        <a href="@Url.Action("ToggleComplete", new { id = item.id })" class="btn btn-success btn-sm"> Complete </a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("ToggleComplete", new { id = item.id })" class="btn btn-warning btn-sm">Incomplete</a>
+                    }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.taskName)
@@ -51,7 +60,31 @@
                     @item.dueDate.ToString("dddd, MM/dd/yyyy HH:mm tt")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.isOverdue)
+                    @* overdue but completed *@
+                    @if (@item.isOverdue && @item.isComplete)
+                    {
+                        <span class="badge bg-light">Completed</span>
+                    }
+                    @* not overdue but completed *@
+                    else if (!@item.isOverdue && @item.isComplete)
+                    {
+                        <span class="badge bg-light">Completed</span>
+                    }
+                    @* overdue *@
+                    else if (@item.isOverdue)
+                    {
+                        <span class="badge bg-danger">Overdue</span>
+                    }
+                    @* not overdue but due in 24 hours *@
+                    else if (!@item.isOverdue && (@item.dueDate.AddDays(-1) <= DateTime.Now))
+                    {
+                        <span class="badge bg-warning">Due Soon</span>
+                    }
+                    @* not overdue *@
+                    else
+                    {
+                        <span class="badge bg-secondary">On Time</span>
+                    }
             </td>
             <td> 
                 @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
