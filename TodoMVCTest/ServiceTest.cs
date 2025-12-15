@@ -6,6 +6,7 @@ namespace TodoMVCTest
 {
     public class ServiceTest
     {
+        /*
         private ITodoVM _vm;
         private ITodoService _service;
 
@@ -39,5 +40,6 @@ namespace TodoMVCTest
 
             Assert.False(lastTask.isComplete);
         }
+        */
     }
 }

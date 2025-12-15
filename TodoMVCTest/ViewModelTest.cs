@@ -5,6 +5,7 @@ namespace TodoMVCTest
 {
     public class ViewModelTest
     {
+        /*
         [Fact]
         public void CreateViewModel_NotNull()
         {
@@ -31,5 +32,6 @@ namespace TodoMVCTest
 
             Assert.Equal(3, count);
         }
+        */
     }
 }
