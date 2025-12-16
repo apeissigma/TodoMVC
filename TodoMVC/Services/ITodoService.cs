@@ -9,8 +9,6 @@ namespace TodoMVC.Services
 
         void ToggleTaskComplete(int id);
 
-        void SeedData();
-
-        static void ClearCollection() { }; 
+        static void ClearCollection() { } 
     }
 }

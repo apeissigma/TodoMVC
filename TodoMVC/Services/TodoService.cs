@@ -51,9 +51,16 @@ namespace TodoMVC.Services
             }
         }
 
+        //clears collection in case of overlaps
+        public static void ClearCollection()
+        {
+            _tasks = null;
+            _isInitialized = false;
+        }
+
         //seed pre-made tasks at launch
         //very lightly supports SOC
-        public void SeedData()
+        private void SeedData()
         {
             _tasks = new List<ITask>
             {
@@ -61,13 +68,6 @@ namespace TodoMVC.Services
                 new TodoTask() { taskName = "UI", taskDescription = "Functional presentation layer", dueDate = new DateTime(2025, 12, 9, 12, 30, 0, 0), isComplete = true },
                 new TodoTask() { taskName = "Tests", taskDescription = "MCFire coverage for model classes & service", dueDate = new DateTime(2025, 12, 9, 12, 30, 0, 0), isComplete = true }
             };
-        }
-
-        //clears collection in case of overlaps
-        public static void ClearCollection()
-        {
-            _tasks = null;
-            _isInitialized = false; 
         }
     }
 }
